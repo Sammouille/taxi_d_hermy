@@ -1,0 +1,123 @@
+[gd_scene load_steps=22 format=3 uid="uid://rsmfj28pa4h"]
+
+[ext_resource type="Script" uid="uid://dqfab0lwdhmtm" path="res://proto_stances/monde.gd" id="1_b32um"]
+[ext_resource type="Script" uid="uid://bt76rs62yua4w" path="res://proto_stances/playedAnimal.gd" id="1_rthog"]
+[ext_resource type="Script" uid="uid://bjvgbg88dac4o" path="res://proto_stances/Animal.gd" id="3_72wh0"]
+[ext_resource type="Script" uid="uid://tfd6qgija5ss" path="res://proto_stances/ecureuil.gd" id="4_30mes"]
+[ext_resource type="Script" uid="uid://bf85opghvt3rq" path="res://proto_stances/grenouille.gd" id="4_jcbmk"]
+[ext_resource type="Script" uid="uid://bujka0yxyg8y5" path="res://proto_stances/oiseau.gd" id="4_sjbhr"]
+[ext_resource type="Script" uid="uid://vmj4ncllr11s" path="res://proto_stances/souris.gd" id="6_u0c1d"]
+
+[sub_resource type="Curve" id="Curve_sjbhr"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -2.9262402, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Resource" id="Resource_2tddm"]
+script = ExtResource("4_sjbhr")
+planage = SubResource("Curve_sjbhr")
+metadata/_custom_type_script = "uid://bujka0yxyg8y5"
+
+[sub_resource type="Curve" id="Curve_u0c1d"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -2.744117, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Resource" id="Resource_sjbhr"]
+script = ExtResource("4_30mes")
+vitesse = 1800.0
+puissance_saut = 700.0
+puissance_mursaut = 500.0
+accroche = SubResource("Curve_u0c1d")
+metadata/_custom_type_script = "uid://tfd6qgija5ss"
+
+[sub_resource type="Curve" id="Curve_jcbmk"]
+_data = [Vector2(0, 0.52918917), 0.0, 0.0, 0, 0, Vector2(0.66298336, 0.76810807), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Resource" id="Resource_jcbmk"]
+script = ExtResource("4_jcbmk")
+courbe_charge_saut = SubResource("Curve_jcbmk")
+metadata/_custom_type_script = "uid://bf85opghvt3rq"
+
+[sub_resource type="Resource" id="Resource_hiynl"]
+script = ExtResource("6_u0c1d")
+vitesse = 3000.0
+metadata/_custom_type_script = "uid://vmj4ncllr11s"
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_m4j1a"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_00n3x"]
+width = 20
+height = 32
+noise = SubResource("FastNoiseLite_m4j1a")
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0njcd"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_b32um"]
+size = Vector2(1153, 270)
+
+[sub_resource type="Gradient" id="Gradient_72wh0"]
+colors = PackedColorArray(0.16847241, 0.06019731, 0.024614355, 1, 0, 0.3764706, 0, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_jcbmk"]
+noise_type = 0
+fractal_type = 3
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_30mes"]
+width = 1153
+height = 270
+noise = SubResource("FastNoiseLite_jcbmk")
+color_ramp = SubResource("Gradient_72wh0")
+
+[node name="Monde" type="Node2D"]
+script = ExtResource("1_b32um")
+gravite = 444.0
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+position = Vector2(1098, 356)
+script = ExtResource("1_rthog")
+animaux = Array[ExtResource("3_72wh0")]([SubResource("Resource_2tddm"), SubResource("Resource_sjbhr"), SubResource("Resource_jcbmk"), SubResource("Resource_hiynl")])
+
+[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
+texture = SubResource("NoiseTexture2D_00n3x")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+shape = SubResource("CapsuleShape2D_0njcd")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="."]
+position = Vector2(1267, 171)
+rotation = -1.5707964
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
+shape = SubResource("RectangleShape2D_b32um")
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D2"]
+texture = SubResource("NoiseTexture2D_30mes")
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="."]
+position = Vector2(-77, 222)
+rotation = -1.5707964
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D3"]
+shape = SubResource("RectangleShape2D_b32um")
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D3"]
+texture = SubResource("NoiseTexture2D_30mes")
+
+[node name="StaticBody2D4" type="StaticBody2D" parent="."]
+position = Vector2(258, -231)
+rotation = -1.5707964
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D4"]
+shape = SubResource("RectangleShape2D_b32um")
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D4"]
+texture = SubResource("NoiseTexture2D_30mes")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(578, 525)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("RectangleShape2D_b32um")
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
+texture = SubResource("NoiseTexture2D_30mes")
