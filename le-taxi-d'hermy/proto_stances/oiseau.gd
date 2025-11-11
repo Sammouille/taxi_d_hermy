@@ -11,11 +11,29 @@ var index_battement:= 0
 var index_planage:= 0.0
 
 var plane:= false
+var saute:= false
+
+var input_axis:= Vector2.ZERO
+
+func prendreInput(_event: InputEvent, actif:= true):
+	if actif:
+		var _input: Vector2
+		_input.x = Input.get_axis("gauche","merde")
+		_input.y = Input.get_axis("haut","bas")
+		input_axis = _input
+		
+		if Input.is_action_pressed("saut"):
+			saute = true
+			return true
+		elif Input.is_action_just_released("saut"):
+			saute = false
+	else :
+		input_axis = Vector2.ZERO
+		saute = false
 
 
 func prendreMouvements(delta: float, velocite: Vector2, on_floor: bool, _mur: int) -> Array[Vector2]:
 	var forces : Array[Vector2] = []
-	var input_axis := prendreAxeInput()
 	
 	if on_floor:
 		if index_planage:
@@ -26,14 +44,14 @@ func prendreMouvements(delta: float, velocite: Vector2, on_floor: bool, _mur: in
 			plane = false
 		if velocite.length():
 			forces.append(-velocite * frottements_sol * delta)
-		if Input.is_action_pressed("saut"):
+		if saute:
 			forces.append(Vector2(0.0, -puissance_saut))
 			plane = true
 		elif input_axis.x:
 			forces.append(Vector2(input_axis.x * vitesse * delta, 0.0))
 	
 	
-	elif Input.is_action_pressed("saut"):
+	elif saute:
 		if input_axis.x:
 			forces.append(Vector2(input_axis.x * vitesse_planage * delta, 0.0))
 			

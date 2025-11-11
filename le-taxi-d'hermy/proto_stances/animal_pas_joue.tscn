@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://v0udus53fg8x"]
+
+[ext_resource type="Script" uid="uid://d1h0s1nd5d6js" path="res://proto_stances/unplayedAnimal.gd" id="1_yjam8"]
+
+[node name="AnimalPasJoue" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("1_yjam8")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = -1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]

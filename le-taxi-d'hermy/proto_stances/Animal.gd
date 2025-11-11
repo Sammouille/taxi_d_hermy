@@ -22,13 +22,8 @@ func setup(_gravite):
 func preparationAnimale():
 	pass
 
-func prendreAxeInput() -> Vector2:
-	var _input: Vector2
-	_input.x = Input.get_axis("gauche","merde")
-	_input.y = Input.get_axis("haut","bas")
-	return _input
 
 @abstract func prendreMouvements(delta: float, velocite: Vector2, on_floor: bool, mur: int) -> Array[Vector2]
 
-func prendreInput(_event: InputEvent) -> void:
+func prendreInput(_event: InputEvent, _actif:= true):
 	pass

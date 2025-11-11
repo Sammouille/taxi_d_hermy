@@ -4,6 +4,8 @@ extends CharacterBody2D
 var active_animal : Animal 
 var index_animal:= 0
 
+var scene_animal_pas_joue:= preload("res://proto_stances/animal_pas_joue.tscn")
+
 var vitesse:= 8.0
 var frottements:= 0.1
 var masse:= 1.0
@@ -14,18 +16,45 @@ var acceleration:= Vector2.ZERO
 
 var gravite: float
 
+var va_passer:= false
+
 func _ready() -> void:
 	gravite = get_tree().root.get_child(0).gravite
 	transformationAnimale()
 
-func transformationAnimale():
+func lacherAnimal(index: int):
+	var animal_lache:= scene_animal_pas_joue.instantiate()
+	animal_lache.animal = animaux[index]
+	%BoiteAnimaux.add_child(animal_lache)
+	animal_lache.global_position = global_position
+	
+	animaux.remove_at(index)
+
+func transformationAnimale(suite:= 0):
+	var ancien_index = index_animal
+	index_animal += suite
+	if index_animal >= animaux.size():
+		index_animal -= animaux.size()
+	elif index_animal < 0:
+		index_animal += animaux.size()
+		
 	active_animal = animaux[index_animal]
+	if suite != 0 and va_passer:
+		va_passer = false
+		lacherAnimal(ancien_index)
+		index_animal = animaux.find(active_animal)
+	
 	active_animal.setup(gravite)
 	masse = active_animal.masse
 	inv_masse = active_animal.inv_masse
 	$Sprite2D.texture = active_animal.sprite
 	$CollisionShape2D.shape = active_animal.collision_shape
-	
+
+func prendreAxeInput() -> Vector2:
+	var _input: Vector2
+	_input.x = Input.get_axis("gauche","merde")
+	_input.y = Input.get_axis("haut","bas")
+	return _input
 
 func appliquerForce(force: Vector2):
 	acceleration += force * inv_masse
@@ -37,18 +66,35 @@ func magieDeMarche():
 	if move_and_slide():
 		velocite = velocity
 
+func recupereAnimal():
+	var index_proche:= -1
+	var plus_proche:= -1
+	var i:= 0
+	for animal in %BoiteAnimaux.get_children():
+		if animal is CharacterBody2D and animal.animal:
+			print((animal.position - position).length())
+			if plus_proche == -1:
+				index_proche = i
+				plus_proche = (animal.position - position).length()
+			elif (animal.position - position).length() < plus_proche:
+				index_proche = i
+				plus_proche = (animal.position - position).length()
+			i += 1
+	if index_proche != -1:
+		animaux.append(%BoiteAnimaux.get_children()[index_proche].animal)
+		%BoiteAnimaux.get_children()[index_proche].queue_free()
+
 func _unhandled_input(event: InputEvent) -> void:
-	active_animal.prendreInput(event)
+	if active_animal.prendreInput(event):
+		va_passer = true
 	if Input.is_action_just_pressed("switch_apres"):
-		index_animal += 1
-		if index_animal >= animaux.size():
-			index_animal -= animaux.size()
-		transformationAnimale()
+		if animaux.size() > 1:
+			transformationAnimale(1)
 	elif Input.is_action_just_pressed("switch_avant"):
-		index_animal -= 1
-		if index_animal < 0:
-			index_animal += animaux.size()
-		transformationAnimale()
+		if animaux.size() > 1:
+			transformationAnimale(-1)
+	elif Input.is_action_just_pressed("sifflet") and is_on_floor():
+		recupereAnimal()
 
 func _physics_process(delta: float) -> void:
 	var mur:= 0

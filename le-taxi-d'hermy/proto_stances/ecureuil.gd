@@ -8,15 +8,25 @@ class_name Ecureuil
 @export var puissance_ejection:= 200.0
 var index_accroche:= 0.0
 
+var input_axis:= Vector2.ZERO
+
 var saute:= false
 
-func prendreInput(_event: InputEvent) -> void:
-	if Input.is_action_just_pressed("saut"):
-		saute = true
+func prendreInput(_event: InputEvent, actif:= true):
+	if actif:
+		var _input: Vector2
+		_input.x = Input.get_axis("gauche","merde")
+		_input.y = Input.get_axis("haut","bas")
+		input_axis = _input
+		if Input.is_action_just_pressed("saut"):
+			saute = true
+			return true
+	else :
+		input_axis = Vector2.ZERO
+		saute = false
 
 func prendreMouvements(delta: float, velocite: Vector2, on_floor: bool, mur: int) -> Array[Vector2]:
 	var forces : Array[Vector2] = []
-	var input_axis := prendreAxeInput()
 	
 	if on_floor:
 		if index_accroche:
