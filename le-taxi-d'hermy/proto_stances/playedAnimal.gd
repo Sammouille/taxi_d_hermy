@@ -4,6 +4,8 @@ extends CharacterBody2D
 var active_animal : Animal 
 var index_animal:= 0
 
+@export var sifflet := true
+
 var scene_animal_pas_joue:= preload("res://proto_stances/animal_pas_joue.tscn")
 
 var vitesse:= 8.0
@@ -23,12 +25,13 @@ func _ready() -> void:
 	transformationAnimale()
 
 func lacherAnimal(index: int):
-	var animal_lache:= scene_animal_pas_joue.instantiate()
-	animal_lache.animal = animaux[index]
-	%BoiteAnimaux.add_child(animal_lache)
-	animal_lache.global_position = global_position
-	
-	animaux.remove_at(index)
+	if sifflet:
+		var animal_lache:= scene_animal_pas_joue.instantiate()
+		animal_lache.animal = animaux[index]
+		%BoiteAnimaux.add_child(animal_lache)
+		animal_lache.global_position = global_position
+		
+		animaux.remove_at(index)
 
 func transformationAnimale(suite:= 0):
 	var ancien_index = index_animal
@@ -67,22 +70,23 @@ func magieDeMarche():
 		velocite = velocity
 
 func recupereAnimal():
-	var index_proche:= -1
-	var plus_proche:= -1
-	var i:= 0
-	for animal in %BoiteAnimaux.get_children():
-		if animal is CharacterBody2D and animal.animal:
-			print((animal.position - position).length())
-			if plus_proche == -1:
-				index_proche = i
-				plus_proche = (animal.position - position).length()
-			elif (animal.position - position).length() < plus_proche:
-				index_proche = i
-				plus_proche = (animal.position - position).length()
-			i += 1
-	if index_proche != -1:
-		animaux.append(%BoiteAnimaux.get_children()[index_proche].animal)
-		%BoiteAnimaux.get_children()[index_proche].queue_free()
+	if sifflet:
+		var index_proche:= -1
+		var plus_proche:= -1
+		var i:= 0
+		for animal in %BoiteAnimaux.get_children():
+			if animal is CharacterBody2D and animal.animal:
+				print((animal.position - position).length())
+				if plus_proche == -1:
+					index_proche = i
+					plus_proche = (animal.position - position).length()
+				elif (animal.position - position).length() < plus_proche:
+					index_proche = i
+					plus_proche = (animal.position - position).length()
+				i += 1
+		if index_proche != -1:
+			animaux.append(%BoiteAnimaux.get_children()[index_proche].animal)
+			%BoiteAnimaux.get_children()[index_proche].queue_free()
 
 func _unhandled_input(event: InputEvent) -> void:
 	if active_animal.prendreInput(event):

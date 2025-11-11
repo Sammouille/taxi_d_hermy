@@ -140,6 +140,7 @@ gravite = 444.0
 position = Vector2(771, 356)
 script = ExtResource("1_rthog")
 animaux = Array[ExtResource("3_72wh0")]([SubResource("Resource_hiynl"), SubResource("Resource_jcbmk"), SubResource("Resource_sjbhr"), SubResource("Resource_2tddm")])
+sifflet = false
 
 [node name="Sprite2D" type="Sprite2D" parent="AnimalJoue"]
 
