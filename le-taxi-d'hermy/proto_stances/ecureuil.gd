@@ -8,6 +8,12 @@ class_name Ecureuil
 @export var puissance_ejection:= 200.0
 var index_accroche:= 0.0
 
+var saute:= false
+
+func prendreInput(_event: InputEvent) -> void:
+	if Input.is_action_just_pressed("saut"):
+		saute = true
+
 func prendreMouvements(delta: float, velocite: Vector2, on_floor: bool, mur: int) -> Array[Vector2]:
 	var forces : Array[Vector2] = []
 	var input_axis := prendreAxeInput()
@@ -17,7 +23,8 @@ func prendreMouvements(delta: float, velocite: Vector2, on_floor: bool, mur: int
 			index_accroche = 0.0
 		if velocite.length():
 			forces.append(-velocite * frottements_sol * delta)
-		if Input.is_action_pressed("saut") and input_axis.y < 0:
+		if saute and input_axis.y < 0:
+			saute = false
 			forces.append(input_axis.normalized() * puissance_saut)
 		elif input_axis.x:
 			forces.append(Vector2(input_axis.x * vitesse * delta, 0.0))
@@ -31,8 +38,9 @@ func prendreMouvements(delta: float, velocite: Vector2, on_floor: bool, mur: int
 				forces.append(Vector2(puissance_ejection, gravite * delta * masse * masse))
 			index_accroche += delta
 			
-		elif Input.is_action_pressed("saut") and input_axis.x > 0.5:
-			forces.append(input_axis.normalized() * puissance_mursaut)
+		elif saute and input_axis.x > 0.0:
+			forces.append(Vector2(puissance_mursaut,-puissance_mursaut))
+			saute = false
 		else :
 			if velocite.length():
 				forces.append(-velocite * frottements_aerien * delta)
@@ -46,8 +54,9 @@ func prendreMouvements(delta: float, velocite: Vector2, on_floor: bool, mur: int
 				forces.append(Vector2(-puissance_ejection, gravite * delta * masse * masse))
 			index_accroche += delta
 			
-		elif Input.is_action_pressed("saut") and input_axis.x :
-			forces.append(input_axis.normalized() * puissance_mursaut)
+		elif saute and input_axis.x < 0.0:
+			saute = false
+			forces.append(Vector2(-puissance_mursaut,-puissance_mursaut))
 		else :
 			if velocite.length():
 				forces.append(-velocite * frottements_aerien * delta)
