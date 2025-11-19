@@ -1,0 +1,130 @@
+[gd_scene load_steps=9 format=3 uid="uid://tb76pjhilx27"]
+
+[ext_resource type="Script" uid="uid://dqfab0lwdhmtm" path="res://proto_stances/monde.gd" id="1_7nqhs"]
+[ext_resource type="PackedScene" uid="uid://d1uo1jmh1u2fc" path="res://proto_pile/animal_pile.tscn" id="2_buj21"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_b32um"]
+size = Vector2(1153, 270)
+
+[sub_resource type="Gradient" id="Gradient_72wh0"]
+colors = PackedColorArray(0.16847241, 0.06019731, 0.024614355, 1, 0, 0.3764706, 0, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_jcbmk"]
+noise_type = 0
+fractal_type = 3
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_30mes"]
+width = 1153
+height = 270
+noise = SubResource("FastNoiseLite_jcbmk")
+color_ramp = SubResource("Gradient_72wh0")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sjbhr"]
+size = Vector2(115, 20)
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_hiynl"]
+width = 115
+height = 20
+noise = SubResource("FastNoiseLite_jcbmk")
+color_ramp = SubResource("Gradient_72wh0")
+
+[node name="Monde" type="Node2D"]
+script = ExtResource("1_7nqhs")
+gravite = 444.0
+
+[node name="BoiteAnimaux" type="Node" parent="."]
+unique_name_in_owner = true
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="."]
+position = Vector2(1267, 171)
+rotation = -1.5707964
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
+shape = SubResource("RectangleShape2D_b32um")
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D2"]
+texture = SubResource("NoiseTexture2D_30mes")
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="."]
+position = Vector2(-77, 222)
+rotation = -1.5707964
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D3"]
+shape = SubResource("RectangleShape2D_b32um")
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D3"]
+texture = SubResource("NoiseTexture2D_30mes")
+
+[node name="StaticBody2D4" type="StaticBody2D" parent="."]
+position = Vector2(258, -231)
+rotation = -1.5707964
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D4"]
+shape = SubResource("RectangleShape2D_b32um")
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D4"]
+texture = SubResource("NoiseTexture2D_30mes")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(578, 525)
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("RectangleShape2D_b32um")
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
+texture = SubResource("NoiseTexture2D_30mes")
+
+[node name="StaticBody2D5" type="StaticBody2D" parent="."]
+position = Vector2(1080, 328)
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D5"]
+shape = SubResource("RectangleShape2D_sjbhr")
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D5"]
+texture = SubResource("NoiseTexture2D_hiynl")
+
+[node name="StaticBody2D6" type="StaticBody2D" parent="."]
+position = Vector2(922, 255)
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D6"]
+shape = SubResource("RectangleShape2D_sjbhr")
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D6"]
+texture = SubResource("NoiseTexture2D_hiynl")
+
+[node name="StaticBody2D7" type="StaticBody2D" parent="."]
+position = Vector2(1080, 170)
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D7"]
+shape = SubResource("RectangleShape2D_sjbhr")
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D7"]
+texture = SubResource("NoiseTexture2D_hiynl")
+
+[node name="StaticBody2D8" type="StaticBody2D" parent="."]
+position = Vector2(918, 90)
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D8"]
+shape = SubResource("RectangleShape2D_sjbhr")
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D8"]
+texture = SubResource("NoiseTexture2D_hiynl")
+
+[node name="Animal_Pile" parent="." instance=ExtResource("2_buj21")]
+position = Vector2(575, 163)

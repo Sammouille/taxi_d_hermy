@@ -1,0 +1,63 @@
+[gd_scene load_steps=4 format=3 uid="uid://buc4g6ley8m08"]
+
+[ext_resource type="Script" uid="uid://cysotxpbat61t" path="res://proto_pile/animal_physic.gd" id="1_8e0f6"]
+[ext_resource type="Texture2D" uid="uid://ckrpoyyub0hj1" path="res://icon.svg" id="2_nr2am"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_lphha"]
+
+[node name="Animal_physic" type="Node2D" node_paths=PackedStringArray("ball", "center")]
+script = ExtResource("1_8e0f6")
+ball = NodePath("RigidBody2D")
+gravity_force = Vector2(0, -10)
+center = NodePath("RigidBody2D/Center")
+PGain = 7.515
+IGain = 2.865
+DGain = 1.18
+integral_saturation_min_max = Vector2(10, 10)
+
+[node name="RigidBody2D" type="RigidBody2D" parent="."]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
+shape = SubResource("CapsuleShape2D_lphha")
+
+[node name="Sprite2D" type="Sprite2D" parent="RigidBody2D"]
+position = Vector2(0.9999962, -2.0000038)
+scale = Vector2(0.3203125, 0.3203125)
+texture = ExtResource("2_nr2am")
+
+[node name="Center" type="Node2D" parent="RigidBody2D"]
+
+[node name="P_Gain" type="HSlider" parent="."]
+offset_left = 850.0
+offset_top = 58.0
+offset_right = 1098.0
+offset_bottom = 171.0
+max_value = 10.0
+step = 0.2
+
+[node name="I_Gain" type="HSlider" parent="."]
+offset_left = 846.0
+offset_top = 159.0
+offset_right = 1103.0
+offset_bottom = 263.0
+max_value = 10.0
+step = 0.2
+
+[node name="D_Gain" type="HSlider" parent="."]
+offset_left = 852.0
+offset_top = 260.0
+offset_right = 1095.0
+offset_bottom = 321.0
+max_value = 10.0
+step = 0.2
+
+[node name="HSlider3" type="HSlider" parent="."]
+visible = false
+offset_right = 8.0
+offset_bottom = 16.0
+
+[connection signal="value_changed" from="P_Gain" to="." method="_on_p_gain_value_changed"]
+[connection signal="value_changed" from="I_Gain" to="." method="_on_i_gain_value_changed"]
+[connection signal="value_changed" from="D_Gain" to="." method="_on_d_gain_value_changed"]

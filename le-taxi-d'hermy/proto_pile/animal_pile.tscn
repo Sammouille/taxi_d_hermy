@@ -1,0 +1,100 @@
+[gd_scene load_steps=12 format=3 uid="uid://d1uo1jmh1u2fc"]
+
+[ext_resource type="Script" uid="uid://d2pjiwrp7vylk" path="res://proto_pile/animal_pile.gd" id="1_8k8u6"]
+[ext_resource type="PackedScene" uid="uid://buc4g6ley8m08" path="res://proto_pile/animal_physic.tscn" id="2_w5h46"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2eyqd"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_8k8u6"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_w5h46"]
+width = 32
+height = 32
+noise = SubResource("FastNoiseLite_8k8u6")
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_8k8u6"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_w5h46"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_0lrpn"]
+width = 16
+height = 16
+noise = SubResource("FastNoiseLite_w5h46")
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_w5h46"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_oyxn6"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_n2jyn"]
+width = 16
+height = 64
+noise = SubResource("FastNoiseLite_oyxn6")
+
+[node name="Animal_Pile" type="Node2D"]
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="." node_paths=PackedStringArray("rotation_pile")]
+script = ExtResource("1_8k8u6")
+rotation_pile = NodePath("Rotation_pile")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+shape = SubResource("CapsuleShape2D_2eyqd")
+debug_color = Color(0, 0.69411767, 0.8117647, 0.90588236)
+
+[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
+texture = SubResource("NoiseTexture2D_w5h46")
+
+[node name="PinJoint2D" type="PinJoint2D" parent="CharacterBody2D"]
+visible = false
+node_a = NodePath("..")
+node_b = NodePath("RigidBody2D")
+
+[node name="RigidBody2D" type="RigidBody2D" parent="CharacterBody2D/PinJoint2D"]
+position = Vector2(0, -33)
+collision_layer = 2
+collision_mask = 2
+constant_force = Vector2(0, -200)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D/PinJoint2D/RigidBody2D"]
+shape = SubResource("CapsuleShape2D_8k8u6")
+
+[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D/PinJoint2D/RigidBody2D"]
+texture = SubResource("NoiseTexture2D_0lrpn")
+
+[node name="PinJoint2D" type="PinJoint2D" parent="CharacterBody2D/PinJoint2D/RigidBody2D/Sprite2D"]
+node_a = NodePath("../..")
+node_b = NodePath("RigidBody2D")
+
+[node name="RigidBody2D" type="RigidBody2D" parent="CharacterBody2D/PinJoint2D/RigidBody2D/Sprite2D/PinJoint2D"]
+position = Vector2(0, -37)
+collision_layer = 2
+collision_mask = 2
+constant_force = Vector2(0, -200)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D/PinJoint2D/RigidBody2D/Sprite2D/PinJoint2D/RigidBody2D"]
+shape = SubResource("CapsuleShape2D_w5h46")
+
+[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D/PinJoint2D/RigidBody2D/Sprite2D/PinJoint2D/RigidBody2D"]
+texture = SubResource("NoiseTexture2D_0lrpn")
+
+[node name="RigidBody2D2" type="RigidBody2D" parent="CharacterBody2D/PinJoint2D/RigidBody2D/Sprite2D/PinJoint2D"]
+position = Vector2(0, -72)
+collision_layer = 2
+collision_mask = 2
+constant_force = Vector2(0, -200)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D/PinJoint2D/RigidBody2D/Sprite2D/PinJoint2D/RigidBody2D2"]
+shape = SubResource("CapsuleShape2D_w5h46")
+
+[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D/PinJoint2D/RigidBody2D/Sprite2D/PinJoint2D/RigidBody2D2"]
+texture = SubResource("NoiseTexture2D_0lrpn")
+
+[node name="Rotation_pile" type="Node2D" parent="CharacterBody2D"]
+visible = false
+
+[node name="pile_animaux" type="Sprite2D" parent="CharacterBody2D/Rotation_pile"]
+position = Vector2(0, -60)
+texture = SubResource("NoiseTexture2D_n2jyn")
+
+[node name="Animal_physic" parent="CharacterBody2D" instance=ExtResource("2_w5h46")]
+visible = false
+position = Vector2(0, -51)
