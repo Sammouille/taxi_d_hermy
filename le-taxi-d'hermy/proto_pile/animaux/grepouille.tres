@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="base_animaux" load_steps=4 format=3 uid="uid://81guhcnavjko"]
+
+[ext_resource type="Texture2D" uid="uid://bxmba2r88drno" path="res://proto_pile/animaux/grepouille_v1_frame1.png" id="1_xdh0y"]
+[ext_resource type="Texture2D" uid="uid://csdolac5yhb31" path="res://proto_pile/animaux/grepouille_v1_frame2.png" id="2_6cpta"]
+[ext_resource type="Script" uid="uid://woiqk6gf0j1s" path="res://proto_pile/animaux/base_animaux.gd" id="3_erim2"]
+
+[resource]
+script = ExtResource("3_erim2")
+nom = "grepouille"
+frame1 = ExtResource("1_xdh0y")
+frame2 = ExtResource("2_6cpta")
+nb_associe = 4
+metadata/_custom_type_script = "uid://woiqk6gf0j1s"

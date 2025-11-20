@@ -1,0 +1,61 @@
+[gd_scene load_steps=7 format=3 uid="uid://c87tl4kq37y6a"]
+
+[ext_resource type="Script" uid="uid://ddqd3x78gost" path="res://proto_pile/ui/ordre_drop_animaux.gd" id="1_avs0w"]
+[ext_resource type="PackedScene" uid="uid://cj5t08oqn0m44" path="res://proto_pile/ui/drop_zone.tscn" id="1_mr15a"]
+[ext_resource type="PackedScene" uid="uid://d0slgxmwgyxox" path="res://proto_pile/ui/animals_object.tscn" id="2_7n4sm"]
+[ext_resource type="Resource" uid="uid://b6hd6sd2qh1ag" path="res://proto_pile/animaux/ecurouille.tres" id="4_avs0w"]
+[ext_resource type="Resource" uid="uid://81guhcnavjko" path="res://proto_pile/animaux/grepouille.tres" id="5_tpp7a"]
+[ext_resource type="Resource" uid="uid://bjlac0jetexpl" path="res://proto_pile/animaux/totope.tres" id="6_86uoa"]
+
+[node name="Node2D" type="Node2D" node_paths=PackedStringArray("btn")]
+script = ExtResource("1_avs0w")
+btn = NodePath("Control/Button")
+
+[node name="Drop" parent="." instance=ExtResource("1_mr15a")]
+position = Vector2(93, 557)
+
+[node name="Drop2" parent="." instance=ExtResource("1_mr15a")]
+position = Vector2(93, 397)
+nb_order = 1
+
+[node name="Drop3" parent="." instance=ExtResource("1_mr15a")]
+position = Vector2(90, 237)
+nb_order = 2
+
+[node name="Drop4" parent="." instance=ExtResource("1_mr15a")]
+position = Vector2(90, 81)
+nb_order = 3
+
+[node name="Animals_Object" parent="." instance=ExtResource("2_7n4sm")]
+position = Vector2(523, 79)
+
+[node name="Animals_Object2" parent="." instance=ExtResource("2_7n4sm")]
+position = Vector2(533, 575)
+sprite_text = ExtResource("4_avs0w")
+
+[node name="Animals_Object3" parent="." instance=ExtResource("2_7n4sm")]
+position = Vector2(525, 408)
+sprite_text = ExtResource("5_tpp7a")
+
+[node name="Animals_Object4" parent="." instance=ExtResource("2_7n4sm")]
+position = Vector2(519, 240)
+sprite_text = ExtResource("6_86uoa")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 751.0
+offset_top = 263.0
+offset_right = 963.0
+offset_bottom = 359.0
+
+[node name="Button" type="Button" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Confirmer l'ordre !"
+
+[connection signal="pressed" from="Control/Button" to="." method="_on_button_pressed"]

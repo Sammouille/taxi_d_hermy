@@ -1,16 +1,54 @@
-[gd_scene load_steps=12 format=3 uid="uid://d1uo1jmh1u2fc"]
+[gd_scene load_steps=24 format=3 uid="uid://d1uo1jmh1u2fc"]
 
 [ext_resource type="Script" uid="uid://d2pjiwrp7vylk" path="res://proto_pile/animal_pile.gd" id="1_8k8u6"]
+[ext_resource type="Resource" uid="uid://c6tshufhd03kq" path="res://proto_pile/animaux/hermy.tres" id="2_n2jyn"]
+[ext_resource type="Texture2D" uid="uid://dn85r37ed3e8y" path="res://proto_pile/animaux/hermy_v1_frame1.png" id="2_oyxn6"]
 [ext_resource type="PackedScene" uid="uid://buc4g6ley8m08" path="res://proto_pile/animal_physic.tscn" id="2_w5h46"]
+[ext_resource type="Resource" uid="uid://b6hd6sd2qh1ag" path="res://proto_pile/animaux/ecurouille.tres" id="3_dxxel"]
+[ext_resource type="Texture2D" uid="uid://dnmq8y7sjk448" path="res://proto_pile/animaux/hermy_v1_frame2.png" id="3_n2jyn"]
+[ext_resource type="Resource" uid="uid://81guhcnavjko" path="res://proto_pile/animaux/grepouille.tres" id="4_sgxc7"]
+[ext_resource type="Resource" uid="uid://bjlac0jetexpl" path="res://proto_pile/animaux/totope.tres" id="5_7qjyq"]
+[ext_resource type="PackedScene" uid="uid://c87tl4kq37y6a" path="res://proto_pile/ui/test_drop.tscn" id="6_rnt5x"]
+[ext_resource type="Texture2D" uid="uid://bknbvate2exrh" path="res://proto_pile/animaux/ecurouille_v1_frame_1.png" id="8_7gmc3"]
+[ext_resource type="Texture2D" uid="uid://c1151qgvexmfr" path="res://proto_pile/animaux/ecurouille_v1_frame_2.png" id="9_oa8rx"]
+[ext_resource type="Texture2D" uid="uid://bxmba2r88drno" path="res://proto_pile/animaux/grepouille_v1_frame1.png" id="10_qojme"]
+[ext_resource type="Texture2D" uid="uid://csdolac5yhb31" path="res://proto_pile/animaux/grepouille_v1_frame2.png" id="11_d7iml"]
+[ext_resource type="Texture2D" uid="uid://dj5qwtcmho4sn" path="res://proto_pile/animaux/totope_v1_frame1.png" id="12_ejygj"]
+[ext_resource type="Texture2D" uid="uid://b18epa78gximh" path="res://proto_pile/animaux/totope_v1_frame2.png" id="13_66f7r"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2eyqd"]
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_8k8u6"]
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_w5h46"]
-width = 32
-height = 32
-noise = SubResource("FastNoiseLite_8k8u6")
+[sub_resource type="SpriteFrames" id="SpriteFrames_rnt5x"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_oyxn6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_n2jyn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_7gmc3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_oa8rx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_qojme")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_d7iml")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_ejygj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_66f7r")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_8k8u6"]
 
@@ -32,16 +70,23 @@ noise = SubResource("FastNoiseLite_oyxn6")
 
 [node name="Animal_Pile" type="Node2D"]
 
-[node name="CharacterBody2D" type="CharacterBody2D" parent="." node_paths=PackedStringArray("rotation_pile")]
+[node name="CharacterBody2D" type="CharacterBody2D" parent="." node_paths=PackedStringArray("rotation_pile", "sprite_main_character", "animal_physics", "order_drop")]
 script = ExtResource("1_8k8u6")
 rotation_pile = NodePath("Rotation_pile")
+sprite_main_character = NodePath("Sprite2D")
+current = ExtResource("2_n2jyn")
+all_animaux = [ExtResource("2_n2jyn"), ExtResource("3_dxxel"), ExtResource("4_sgxc7"), ExtResource("5_7qjyq")]
+animal_physics = [NodePath("Animal_physic"), NodePath("Animal_physic2"), NodePath("Animal_physic3")]
+order_drop = NodePath("../order_drop")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
 shape = SubResource("CapsuleShape2D_2eyqd")
 debug_color = Color(0, 0.69411767, 0.8117647, 0.90588236)
 
-[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
-texture = SubResource("NoiseTexture2D_w5h46")
+[node name="Sprite2D" type="AnimatedSprite2D" parent="CharacterBody2D"]
+position = Vector2(0, -17.000002)
+scale = Vector2(0.43, 0.43)
+sprite_frames = SubResource("SpriteFrames_rnt5x")
 
 [node name="PinJoint2D" type="PinJoint2D" parent="CharacterBody2D"]
 visible = false
@@ -96,5 +141,26 @@ position = Vector2(0, -60)
 texture = SubResource("NoiseTexture2D_n2jyn")
 
 [node name="Animal_physic" parent="CharacterBody2D" instance=ExtResource("2_w5h46")]
-visible = false
-position = Vector2(0, -51)
+position = Vector2(0, -34)
+start_frame = 2
+nb_frame = 2
+
+[node name="Animal_physic2" parent="CharacterBody2D" instance=ExtResource("2_w5h46")]
+position = Vector2(0, -65)
+center = Vector2(0, -40)
+start_frame = 4
+nb_frame = 2
+
+[node name="Animal_physic3" parent="CharacterBody2D" instance=ExtResource("2_w5h46")]
+position = Vector2(0, -100)
+center = Vector2(0, -60)
+start_frame = 6
+nb_frame = 2
+
+[node name="ChangeSprite" type="Timer" parent="CharacterBody2D"]
+wait_time = 0.5
+autostart = true
+
+[node name="order_drop" parent="." instance=ExtResource("6_rnt5x")]
+
+[connection signal="timeout" from="CharacterBody2D/ChangeSprite" to="CharacterBody2D" method="_on_change_sprite_timeout"]

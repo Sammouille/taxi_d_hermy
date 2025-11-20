@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="base_animaux" load_steps=4 format=3 uid="uid://c6tshufhd03kq"]
+
+[ext_resource type="Script" uid="uid://woiqk6gf0j1s" path="res://proto_pile/animaux/base_animaux.gd" id="1_psmph"]
+[ext_resource type="Texture2D" uid="uid://dn85r37ed3e8y" path="res://proto_pile/animaux/hermy_v1_frame1.png" id="1_qyfax"]
+[ext_resource type="Texture2D" uid="uid://dnmq8y7sjk448" path="res://proto_pile/animaux/hermy_v1_frame2.png" id="2_1stb5"]
+
+[resource]
+script = ExtResource("1_psmph")
+nom = "hermy"
+frame1 = ExtResource("1_qyfax")
+frame2 = ExtResource("2_1stb5")
+metadata/_custom_type_script = "uid://woiqk6gf0j1s"

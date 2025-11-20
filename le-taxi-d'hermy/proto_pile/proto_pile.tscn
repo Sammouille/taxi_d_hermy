@@ -36,7 +36,7 @@ gravite = 444.0
 unique_name_in_owner = true
 
 [node name="StaticBody2D2" type="StaticBody2D" parent="."]
-position = Vector2(1267, 171)
+position = Vector2(1176, 171)
 rotation = -1.5707964
 collision_layer = 3
 collision_mask = 3
@@ -48,7 +48,7 @@ shape = SubResource("RectangleShape2D_b32um")
 texture = SubResource("NoiseTexture2D_30mes")
 
 [node name="StaticBody2D3" type="StaticBody2D" parent="."]
-position = Vector2(-77, 222)
+position = Vector2(-168, 222)
 rotation = -1.5707964
 collision_layer = 3
 collision_mask = 3
@@ -60,7 +60,7 @@ shape = SubResource("RectangleShape2D_b32um")
 texture = SubResource("NoiseTexture2D_30mes")
 
 [node name="StaticBody2D4" type="StaticBody2D" parent="."]
-position = Vector2(258, -231)
+position = Vector2(167, -300)
 rotation = -1.5707964
 collision_layer = 3
 collision_mask = 3
@@ -72,7 +72,7 @@ shape = SubResource("RectangleShape2D_b32um")
 texture = SubResource("NoiseTexture2D_30mes")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
-position = Vector2(578, 525)
+position = Vector2(487, 525)
 collision_layer = 3
 collision_mask = 3
 
@@ -83,7 +83,7 @@ shape = SubResource("RectangleShape2D_b32um")
 texture = SubResource("NoiseTexture2D_30mes")
 
 [node name="StaticBody2D5" type="StaticBody2D" parent="."]
-position = Vector2(1080, 328)
+position = Vector2(989, 328)
 collision_layer = 3
 collision_mask = 3
 
@@ -94,7 +94,7 @@ shape = SubResource("RectangleShape2D_sjbhr")
 texture = SubResource("NoiseTexture2D_hiynl")
 
 [node name="StaticBody2D6" type="StaticBody2D" parent="."]
-position = Vector2(922, 255)
+position = Vector2(831, 255)
 collision_layer = 3
 collision_mask = 3
 
@@ -105,7 +105,7 @@ shape = SubResource("RectangleShape2D_sjbhr")
 texture = SubResource("NoiseTexture2D_hiynl")
 
 [node name="StaticBody2D7" type="StaticBody2D" parent="."]
-position = Vector2(1080, 170)
+position = Vector2(989, 170)
 collision_layer = 3
 collision_mask = 3
 
@@ -116,7 +116,7 @@ shape = SubResource("RectangleShape2D_sjbhr")
 texture = SubResource("NoiseTexture2D_hiynl")
 
 [node name="StaticBody2D8" type="StaticBody2D" parent="."]
-position = Vector2(918, 90)
+position = Vector2(827, 90)
 collision_layer = 3
 collision_mask = 3
 
@@ -127,4 +127,3 @@ shape = SubResource("RectangleShape2D_sjbhr")
 texture = SubResource("NoiseTexture2D_hiynl")
 
 [node name="Animal_Pile" parent="." instance=ExtResource("2_buj21")]
-position = Vector2(575, 163)

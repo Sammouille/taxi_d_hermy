@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://d0slgxmwgyxox"]
+
+[ext_resource type="Script" uid="uid://d0mitef14325q" path="res://proto_pile/ui/animals_object.gd" id="1_qeouc"]
+[ext_resource type="Texture2D" uid="uid://dn85r37ed3e8y" path="res://proto_pile/animaux/hermy_v1_frame1.png" id="1_van5u"]
+[ext_resource type="Resource" uid="uid://c6tshufhd03kq" path="res://proto_pile/animaux/hermy.tres" id="2_xdesi"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_van5u"]
+size = Vector2(68, 68)
+
+[node name="Animals_Object" type="Node2D" groups=["animal_objects"]]
+script = ExtResource("1_qeouc")
+sprite_text = ExtResource("2_xdesi")
+
+[node name="Choix_sprite" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+texture = ExtResource("1_van5u")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-1, 18)
+shape = SubResource("RectangleShape2D_van5u")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
+[connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
+[connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]

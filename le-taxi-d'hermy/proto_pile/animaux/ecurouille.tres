@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="base_animaux" load_steps=4 format=3 uid="uid://b6hd6sd2qh1ag"]
+
+[ext_resource type="Script" uid="uid://woiqk6gf0j1s" path="res://proto_pile/animaux/base_animaux.gd" id="1_ggjfn"]
+[ext_resource type="Texture2D" uid="uid://bknbvate2exrh" path="res://proto_pile/animaux/ecurouille_v1_frame_1.png" id="1_wwlf6"]
+[ext_resource type="Texture2D" uid="uid://c1151qgvexmfr" path="res://proto_pile/animaux/ecurouille_v1_frame_2.png" id="2_6bcmh"]
+
+[resource]
+script = ExtResource("1_ggjfn")
+nom = "ecurouille"
+frame1 = ExtResource("1_wwlf6")
+frame2 = ExtResource("2_6bcmh")
+nb_associe = 2
+metadata/_custom_type_script = "uid://woiqk6gf0j1s"

@@ -1,35 +1,93 @@
-[gd_scene load_steps=4 format=3 uid="uid://buc4g6ley8m08"]
+[gd_scene load_steps=16 format=3 uid="uid://buc4g6ley8m08"]
 
 [ext_resource type="Script" uid="uid://cysotxpbat61t" path="res://proto_pile/animal_physic.gd" id="1_8e0f6"]
-[ext_resource type="Texture2D" uid="uid://ckrpoyyub0hj1" path="res://icon.svg" id="2_nr2am"]
+[ext_resource type="Resource" uid="uid://c6tshufhd03kq" path="res://proto_pile/animaux/hermy.tres" id="2_on8eh"]
+[ext_resource type="Resource" uid="uid://b6hd6sd2qh1ag" path="res://proto_pile/animaux/ecurouille.tres" id="3_ljwup"]
+[ext_resource type="Texture2D" uid="uid://dn85r37ed3e8y" path="res://proto_pile/animaux/hermy_v1_frame1.png" id="3_lphha"]
+[ext_resource type="Texture2D" uid="uid://bknbvate2exrh" path="res://proto_pile/animaux/ecurouille_v1_frame_1.png" id="4_1j8lj"]
+[ext_resource type="Texture2D" uid="uid://dnmq8y7sjk448" path="res://proto_pile/animaux/hermy_v1_frame2.png" id="4_a55fu"]
+[ext_resource type="Resource" uid="uid://81guhcnavjko" path="res://proto_pile/animaux/grepouille.tres" id="4_j4oow"]
+[ext_resource type="Resource" uid="uid://bjlac0jetexpl" path="res://proto_pile/animaux/totope.tres" id="5_4qxws"]
+[ext_resource type="Texture2D" uid="uid://c1151qgvexmfr" path="res://proto_pile/animaux/ecurouille_v1_frame_2.png" id="5_okqvi"]
+[ext_resource type="Texture2D" uid="uid://bxmba2r88drno" path="res://proto_pile/animaux/grepouille_v1_frame1.png" id="6_x8om5"]
+[ext_resource type="Texture2D" uid="uid://csdolac5yhb31" path="res://proto_pile/animaux/grepouille_v1_frame2.png" id="7_2x3ed"]
+[ext_resource type="Texture2D" uid="uid://dj5qwtcmho4sn" path="res://proto_pile/animaux/totope_v1_frame1.png" id="8_on8eh"]
+[ext_resource type="Texture2D" uid="uid://b18epa78gximh" path="res://proto_pile/animaux/totope_v1_frame2.png" id="9_ljwup"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_lphha"]
+height = 20.0
 
-[node name="Animal_physic" type="Node2D" node_paths=PackedStringArray("ball", "center")]
+[sub_resource type="SpriteFrames" id="SpriteFrames_3c4jm"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_lphha")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_a55fu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_1j8lj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_okqvi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_x8om5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_2x3ed")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_on8eh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_ljwup")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Animal_physic" type="Node2D" node_paths=PackedStringArray("ball", "Ptext", "Itext", "Dtext", "container")]
 script = ExtResource("1_8e0f6")
 ball = NodePath("RigidBody2D")
-gravity_force = Vector2(0, -10)
-center = NodePath("RigidBody2D/Center")
-PGain = 7.515
-IGain = 2.865
-DGain = 1.18
-integral_saturation_min_max = Vector2(10, 10)
+Ptext = NodePath("RigidBody2D/Container/P_Gain/RichTextLabel")
+Itext = NodePath("RigidBody2D/Container/I_Gain/RichTextLabel")
+Dtext = NodePath("RigidBody2D/Container/D_Gain/RichTextLabel")
+container = NodePath("RigidBody2D/Container")
+nb_frame = null
+animaux_tab = Array[Resource]([ExtResource("2_on8eh"), ExtResource("3_ljwup"), ExtResource("4_j4oow"), ExtResource("5_4qxws")])
 
 [node name="RigidBody2D" type="RigidBody2D" parent="."]
 collision_layer = 2
-collision_mask = 2
+lock_rotation = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
 shape = SubResource("CapsuleShape2D_lphha")
 
-[node name="Sprite2D" type="Sprite2D" parent="RigidBody2D"]
+[node name="Sprite2D" type="AnimatedSprite2D" parent="RigidBody2D"]
+unique_name_in_owner = true
 position = Vector2(0.9999962, -2.0000038)
 scale = Vector2(0.3203125, 0.3203125)
-texture = ExtResource("2_nr2am")
+sprite_frames = SubResource("SpriteFrames_3c4jm")
+frame = 3
+frame_progress = 0.5653272
 
 [node name="Center" type="Node2D" parent="RigidBody2D"]
+visible = false
 
-[node name="P_Gain" type="HSlider" parent="."]
+[node name="Container" type="Control" parent="RigidBody2D"]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_left = -583.0
+offset_top = -333.0
+offset_right = -575.0
+offset_bottom = -317.0
+
+[node name="P_Gain" type="HSlider" parent="RigidBody2D/Container"]
+layout_mode = 0
 offset_left = 850.0
 offset_top = 58.0
 offset_right = 1098.0
@@ -37,7 +95,13 @@ offset_bottom = 171.0
 max_value = 10.0
 step = 0.2
 
-[node name="I_Gain" type="HSlider" parent="."]
+[node name="RichTextLabel" type="RichTextLabel" parent="RigidBody2D/Container/P_Gain"]
+layout_mode = 0
+offset_right = 245.0
+offset_bottom = 40.0
+
+[node name="I_Gain" type="HSlider" parent="RigidBody2D/Container"]
+layout_mode = 0
 offset_left = 846.0
 offset_top = 159.0
 offset_right = 1103.0
@@ -45,7 +109,13 @@ offset_bottom = 263.0
 max_value = 10.0
 step = 0.2
 
-[node name="D_Gain" type="HSlider" parent="."]
+[node name="RichTextLabel" type="RichTextLabel" parent="RigidBody2D/Container/I_Gain"]
+layout_mode = 0
+offset_right = 243.0
+offset_bottom = 40.0
+
+[node name="D_Gain" type="HSlider" parent="RigidBody2D/Container"]
+layout_mode = 0
 offset_left = 852.0
 offset_top = 260.0
 offset_right = 1095.0
@@ -53,11 +123,16 @@ offset_bottom = 321.0
 max_value = 10.0
 step = 0.2
 
-[node name="HSlider3" type="HSlider" parent="."]
-visible = false
-offset_right = 8.0
-offset_bottom = 16.0
+[node name="RichTextLabel" type="RichTextLabel" parent="RigidBody2D/Container/D_Gain"]
+layout_mode = 0
+offset_right = 155.0
+offset_bottom = 22.0
 
-[connection signal="value_changed" from="P_Gain" to="." method="_on_p_gain_value_changed"]
-[connection signal="value_changed" from="I_Gain" to="." method="_on_i_gain_value_changed"]
-[connection signal="value_changed" from="D_Gain" to="." method="_on_d_gain_value_changed"]
+[node name="ChangeSprite" type="Timer" parent="."]
+wait_time = 0.5
+autostart = true
+
+[connection signal="value_changed" from="RigidBody2D/Container/P_Gain" to="." method="_on_p_gain_value_changed"]
+[connection signal="value_changed" from="RigidBody2D/Container/I_Gain" to="." method="_on_i_gain_value_changed"]
+[connection signal="value_changed" from="RigidBody2D/Container/D_Gain" to="." method="_on_d_gain_value_changed"]
+[connection signal="timeout" from="ChangeSprite" to="." method="_on_change_sprite_timeout"]
