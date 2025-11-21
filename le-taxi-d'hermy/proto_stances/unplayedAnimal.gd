@@ -14,7 +14,7 @@ var acceleration:= Vector2.ZERO
 var gravite: float
 
 func _ready() -> void:
-	gravite = get_tree().root.get_child(0).gravite
+	gravite = get_tree().root.get_child(2).gravite
 	transformationAnimale()
 
 func _unhandled_input(event: InputEvent) -> void:
