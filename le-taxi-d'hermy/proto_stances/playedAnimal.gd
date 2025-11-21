@@ -21,7 +21,7 @@ var gravite: float
 var va_passer:= false
 
 func _ready() -> void:
-	gravite = get_tree().root.get_child(0).gravite
+	gravite = get_tree().root.get_child(2).gravite
 	transformationAnimale()
 
 func lacherAnimal(index: int):
@@ -99,6 +99,13 @@ func _unhandled_input(event: InputEvent) -> void:
 			transformationAnimale(-1)
 	elif Input.is_action_just_pressed("sifflet") and is_on_floor():
 		recupereAnimal()
+	
+	if Input.is_action_pressed("grossir"):
+		scale *= 1.1
+		print(scale)
+	elif Input.is_action_pressed("reduire"):
+		scale *= 0.9
+		print(scale)
 
 func _physics_process(delta: float) -> void:
 	var mur:= 0
