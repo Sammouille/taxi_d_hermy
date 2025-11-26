@@ -9,7 +9,7 @@
 
 [node name="Node2D" type="Node2D" node_paths=PackedStringArray("btn")]
 script = ExtResource("1_avs0w")
-btn = NodePath("Control/Button")
+btn = NodePath("Ctrl_Bouton/Button")
 
 [node name="Drop" parent="." instance=ExtResource("1_mr15a")]
 position = Vector2(93, 557)
@@ -41,7 +41,7 @@ sprite_text = ExtResource("5_tpp7a")
 position = Vector2(519, 240)
 sprite_text = ExtResource("6_86uoa")
 
-[node name="Control" type="Control" parent="."]
+[node name="Ctrl_Bouton" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
 offset_left = 751.0
@@ -49,7 +49,7 @@ offset_top = 263.0
 offset_right = 963.0
 offset_bottom = 359.0
 
-[node name="Button" type="Button" parent="Control"]
+[node name="Button" type="Button" parent="Ctrl_Bouton"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -58,4 +58,21 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "Confirmer l'ordre !"
 
-[connection signal="pressed" from="Control/Button" to="." method="_on_button_pressed"]
+[node name="Text" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Text"]
+layout_mode = 0
+offset_left = 745.0
+offset_top = 25.0
+offset_right = 1111.0
+offset_bottom = 80.0
+theme_override_font_sizes/normal_font_size = 32
+text = "Ordre dans le sac !"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="pressed" from="Ctrl_Bouton/Button" to="." method="_on_button_pressed"]

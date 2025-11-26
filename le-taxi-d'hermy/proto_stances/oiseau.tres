@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="Oiseau" load_steps=5 format=3 uid="uid://dwmt5c5i1emyw"]
+
+[ext_resource type="Script" uid="uid://bujka0yxyg8y5" path="res://proto_stances/oiseau.gd" id="1_nhhin"]
+[ext_resource type="Texture2D" uid="uid://7can8oimk4r0" path="res://assets/piaf_2.png" id="2_61ky5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2ktax"]
+size = Vector2(64, 64)
+
+[sub_resource type="Curve" id="Curve_16f5b"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.75, 0.831), -0.046, -0.046, 0, 0, Vector2(1, 0.416), -2.926, -0.046, 0, 0]
+point_count = 3
+
+[resource]
+script = ExtResource("1_nhhin")
+vitesse_planage = 300.0
+puissance_saut = 150.0
+puissance_battements = 200.0
+planage = SubResource("Curve_16f5b")
+sprite = ExtResource("2_61ky5")
+collision_shape = SubResource("RectangleShape2D_2ktax")
+metadata/_custom_type_script = "uid://bujka0yxyg8y5"

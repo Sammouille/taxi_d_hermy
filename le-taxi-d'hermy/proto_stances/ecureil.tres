@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="Ecureuil" load_steps=5 format=3 uid="uid://dh4gmw8dtv6kj"]
+
+[ext_resource type="Script" uid="uid://tfd6qgija5ss" path="res://proto_stances/ecureuil.gd" id="1_rjjj1"]
+[ext_resource type="Texture2D" uid="uid://dr0entchj6ik2" path="res://assets/ecurouille_2.png" id="2_8hxu1"]
+
+[sub_resource type="Curve" id="Curve_3twux"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -2.744, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rvtlf"]
+size = Vector2(64, 64)
+
+[resource]
+script = ExtResource("1_rjjj1")
+vitesse = 1800.0
+puissance_saut = 700.0
+puissance_mursaut = 400.0
+accroche = SubResource("Curve_3twux")
+sprite = ExtResource("2_8hxu1")
+collision_shape = SubResource("RectangleShape2D_rvtlf")
+metadata/_custom_type_script = "uid://tfd6qgija5ss"

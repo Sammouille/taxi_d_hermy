@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Souris" load_steps=4 format=3 uid="uid://byokky2obp467"]
+
+[ext_resource type="Script" uid="uid://vmj4ncllr11s" path="res://proto_stances/souris.gd" id="1_nx5qa"]
+[ext_resource type="Texture2D" uid="uid://dqlafeqikpj76" path="res://assets/hermy_64_64.png" id="2_ai77t"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_m3r3n"]
+size = Vector2(64, 64)
+
+[resource]
+script = ExtResource("1_nx5qa")
+vitesse = 5000.0
+sprite = ExtResource("2_ai77t")
+collision_shape = SubResource("RectangleShape2D_m3r3n")
+metadata/_custom_type_script = "uid://vmj4ncllr11s"

@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="Grenouille" load_steps=5 format=3 uid="uid://buxfe7l5tkpxl"]
+
+[ext_resource type="Script" uid="uid://bf85opghvt3rq" path="res://proto_stances/grenouille.gd" id="1_oit7x"]
+[ext_resource type="Texture2D" uid="uid://dys6qyu12yxyf" path="res://assets/grenouille_2.png" id="2_i45d2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_20wi2"]
+size = Vector2(64, 64)
+
+[sub_resource type="Curve" id="Curve_6bx4a"]
+_data = [Vector2(0, 0.177), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[resource]
+script = ExtResource("1_oit7x")
+courbe_charge_saut = SubResource("Curve_6bx4a")
+puissance_max_saut = 2200
+frottements_sol = 30.0
+sprite = ExtResource("2_i45d2")
+collision_shape = SubResource("RectangleShape2D_20wi2")
+metadata/_custom_type_script = "uid://bf85opghvt3rq"
