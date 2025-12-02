@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://rsmfj28pa4h"]
+[gd_scene load_steps=17 format=3 uid="uid://rsmfj28pa4h"]
 
 [ext_resource type="Script" uid="uid://dqfab0lwdhmtm" path="res://proto_stances/monde.gd" id="1_b32um"]
 [ext_resource type="Script" uid="uid://bt76rs62yua4w" path="res://proto_stances/playedAnimal.gd" id="1_rthog"]
@@ -7,6 +7,9 @@
 [ext_resource type="Resource" uid="uid://buxfe7l5tkpxl" path="res://proto_stances/grenouille.tres" id="5_sjbhr"]
 [ext_resource type="Resource" uid="uid://dh4gmw8dtv6kj" path="res://proto_stances/ecureil.tres" id="6_hiynl"]
 [ext_resource type="Resource" uid="uid://dwmt5c5i1emyw" path="res://proto_stances/oiseau.tres" id="7_hiynl"]
+[ext_resource type="PackedScene" uid="uid://bk6uiilg0va" path="res://proto_stances/ui/ani_stance_menu.tscn" id="8_hiynl"]
+[ext_resource type="PackedScene" uid="uid://dn4t8lkyyydc1" path="res://proto_stances/bench.tscn" id="9_2tddm"]
+[ext_resource type="PackedScene" uid="uid://bsxtvna23j6jk" path="res://proto_stances/ui/bag_menu.tscn" id="10_h8sty"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b32um"]
 size = Vector2(1153, 270)
@@ -37,10 +40,12 @@ color_ramp = SubResource("Gradient_72wh0")
 script = ExtResource("1_b32um")
 gravite = 444.0
 
-[node name="AnimalJoue" type="CharacterBody2D" parent="."]
+[node name="AnimalJoue" type="CharacterBody2D" parent="." node_paths=PackedStringArray("menu", "bag_menu")]
 position = Vector2(771, 356)
 script = ExtResource("1_rthog")
 animaux = Array[ExtResource("3_72wh0")]([ExtResource("4_sjbhr"), ExtResource("5_sjbhr"), ExtResource("6_hiynl"), ExtResource("7_hiynl")])
+menu = NodePath("../Menu")
+bag_menu = NodePath("../bag_menu")
 
 [node name="Sprite2D" type="Sprite2D" parent="AnimalJoue"]
 
@@ -139,3 +144,13 @@ shape = SubResource("RectangleShape2D_sjbhr")
 
 [node name="Sprite2D" type="Sprite2D" parent="StaticBody2D8"]
 texture = SubResource("NoiseTexture2D_hiynl")
+
+[node name="Menu" parent="." instance=ExtResource("8_hiynl")]
+
+[node name="Benches" type="Node2D" parent="."]
+
+[node name="Bench" parent="Benches" instance=ExtResource("9_2tddm")]
+position = Vector2(460, 358)
+
+[node name="bag_menu" parent="." instance=ExtResource("10_h8sty")]
+modulate = Color(1, 1, 1, 0)

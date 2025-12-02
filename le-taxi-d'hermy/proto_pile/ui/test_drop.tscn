@@ -12,33 +12,33 @@ script = ExtResource("1_avs0w")
 btn = NodePath("Ctrl_Bouton/Button")
 
 [node name="Drop" parent="." instance=ExtResource("1_mr15a")]
-position = Vector2(93, 557)
+position = Vector2(91, 87)
 
 [node name="Drop2" parent="." instance=ExtResource("1_mr15a")]
-position = Vector2(93, 397)
+position = Vector2(272, 86)
 nb_order = 1
 
 [node name="Drop3" parent="." instance=ExtResource("1_mr15a")]
-position = Vector2(90, 237)
+position = Vector2(462, 88)
 nb_order = 2
 
 [node name="Drop4" parent="." instance=ExtResource("1_mr15a")]
-position = Vector2(90, 81)
+position = Vector2(653, 87)
 nb_order = 3
 
 [node name="Animals_Object" parent="." instance=ExtResource("2_7n4sm")]
-position = Vector2(523, 79)
+position = Vector2(82, 530)
 
 [node name="Animals_Object2" parent="." instance=ExtResource("2_7n4sm")]
-position = Vector2(533, 575)
+position = Vector2(667, 527)
 sprite_text = ExtResource("4_avs0w")
 
 [node name="Animals_Object3" parent="." instance=ExtResource("2_7n4sm")]
-position = Vector2(525, 408)
+position = Vector2(490, 528)
 sprite_text = ExtResource("5_tpp7a")
 
 [node name="Animals_Object4" parent="." instance=ExtResource("2_7n4sm")]
-position = Vector2(519, 240)
+position = Vector2(273, 525)
 sprite_text = ExtResource("6_86uoa")
 
 [node name="Ctrl_Bouton" type="Control" parent="."]

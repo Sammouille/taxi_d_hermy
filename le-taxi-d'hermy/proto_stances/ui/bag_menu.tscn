@@ -1,0 +1,97 @@
+[gd_scene load_steps=5 format=3 uid="uid://bsxtvna23j6jk"]
+
+[ext_resource type="Texture2D" uid="uid://c153q7bng80dm" path="res://assets/bag.png" id="1_1erkt"]
+[ext_resource type="Script" uid="uid://mpit7057mg8i" path="res://proto_stances/ui/bag_menu.gd" id="1_37meq"]
+[ext_resource type="PackedScene" uid="uid://bfr74nrvkq1q6" path="res://proto_stances/ui/ani_stance_drop_zone.tscn" id="2_37meq"]
+[ext_resource type="PackedScene" uid="uid://bsushhob1ldsm" path="res://proto_stances/ui/ani_stance_object.tscn" id="4_ubw5w"]
+
+[node name="bag_menu" type="Node2D" node_paths=PackedStringArray("btn")]
+script = ExtResource("1_37meq")
+btn = NodePath("Sprite_Sac/Btn_Validation")
+
+[node name="Sprite_Sac" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(320, 337)
+scale = Vector2(1.4, 1.4)
+texture = ExtResource("1_1erkt")
+
+[node name="Animals_Object" parent="Sprite_Sac" groups=["animal_objects"] instance=ExtResource("4_ubw5w")]
+position = Vector2(-74.28571, -69.28571)
+scale = Vector2(0.99999994, 0.99999994)
+
+[node name="Drop" parent="Sprite_Sac" instance=ExtResource("2_37meq")]
+position = Vector2(-74.28572, -57.142853)
+scale = Vector2(0.7142857, 0.7142857)
+
+[node name="Animals_Object2" parent="Sprite_Sac" groups=["animal_objects"] instance=ExtResource("4_ubw5w")]
+position = Vector2(-70.71429, 40.714287)
+scale = Vector2(0.99999994, 0.99999994)
+
+[node name="Drop2" parent="Sprite_Sac" instance=ExtResource("2_37meq")]
+position = Vector2(-70.71429, 52.85714)
+scale = Vector2(0.7142857, 0.7142857)
+nb_order = 1
+
+[node name="Animals_Object3" parent="Sprite_Sac" groups=["animal_objects"] instance=ExtResource("4_ubw5w")]
+position = Vector2(37.14286, 61.428577)
+scale = Vector2(0.99999994, 0.99999994)
+
+[node name="Drop3" parent="Sprite_Sac" instance=ExtResource("2_37meq")]
+position = Vector2(34.999992, 79.285706)
+scale = Vector2(0.7142857, 0.7142857)
+nb_order = 2
+
+[node name="Btn_Validation" type="Button" parent="Sprite_Sac"]
+offset_left = 33.571423
+offset_top = 126.42857
+offset_right = 175.00002
+offset_bottom = 194.28572
+text = "Valide en
+cliquant ici"
+
+[node name="Bench_Pos" type="Node2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(893, 0)
+
+[node name="Animals_Object" parent="Bench_Pos" groups=["animal_objects"] instance=ExtResource("4_ubw5w")]
+
+[node name="Drop" parent="Bench_Pos" instance=ExtResource("2_37meq")]
+nb_order = 3
+
+[node name="Animals_Object2" parent="Bench_Pos" groups=["animal_objects"] instance=ExtResource("4_ubw5w")]
+
+[node name="Drop2" parent="Bench_Pos" instance=ExtResource("2_37meq")]
+nb_order = 4
+
+[node name="Animals_Object3" parent="Bench_Pos" groups=["animal_objects"] instance=ExtResource("4_ubw5w")]
+
+[node name="Drop3" parent="Bench_Pos" instance=ExtResource("2_37meq")]
+nb_order = 5
+
+[node name="Animals_Object4" parent="Bench_Pos" groups=["animal_objects"] instance=ExtResource("4_ubw5w")]
+
+[node name="Drop4" parent="Bench_Pos" instance=ExtResource("2_37meq")]
+nb_order = 6
+
+[node name="Animals_Object5" parent="Bench_Pos" groups=["animal_objects"] instance=ExtResource("4_ubw5w")]
+
+[node name="Drop5" parent="Bench_Pos" instance=ExtResource("2_37meq")]
+nb_order = 7
+
+[node name="Animals_Object6" parent="Bench_Pos" groups=["animal_objects"] instance=ExtResource("4_ubw5w")]
+
+[node name="Drop6" parent="Bench_Pos" instance=ExtResource("2_37meq")]
+nb_order = 8
+
+[node name="Animals_Object7" parent="Bench_Pos" groups=["animal_objects"] instance=ExtResource("4_ubw5w")]
+
+[node name="Drop7" parent="Bench_Pos" instance=ExtResource("2_37meq")]
+nb_order = 9
+
+[node name="Animals_Object8" parent="Bench_Pos" groups=["animal_objects"] instance=ExtResource("4_ubw5w")]
+position = Vector2(-8, 103)
+
+[node name="Drop8" parent="Bench_Pos" instance=ExtResource("2_37meq")]
+nb_order = 10
+
+[connection signal="pressed" from="Sprite_Sac/Btn_Validation" to="." method="_on_btn_validation_pressed"]

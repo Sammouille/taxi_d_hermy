@@ -6,6 +6,9 @@ var index_animal:= 0
 
 @export var sifflet := true
 
+@export var menu : Node2D
+@export var bag_menu : Node2D
+var tab_base_animaux : Array[Animal]
 var scene_animal_pas_joue:= preload("res://proto_stances/animal_pas_joue.tscn")
 
 var vitesse:= 8.0
@@ -20,9 +23,19 @@ var gravite: float
 
 var va_passer:= false
 
+var banc_interactif 
+#signal bag_menu_opened(tab_team,tab_bench)
+
 func _ready() -> void:
 	gravite = get_tree().root.get_child(2).gravite
 	transformationAnimale()
+	menu.confirm_ordre.connect(magieReconstructiveMenu.bind())
+	
+	tab_base_animaux = animaux.duplicate()
+	print(animaux," alors ", tab_base_animaux)
+	for i in get_tree().get_nodes_in_group("bench"):
+		i.sitting.connect(gestionBanc.bind())
+	bag_menu.fin_menu_sac.connect(gestionFinBanc.bind())
 
 func lacherAnimal(index: int):
 	if sifflet:
@@ -34,6 +47,7 @@ func lacherAnimal(index: int):
 		animaux.remove_at(index)
 
 func transformationAnimale(suite:= 0):
+	print(index_animal)
 	var ancien_index = index_animal
 	index_animal += suite
 	if index_animal >= animaux.size():
@@ -88,6 +102,14 @@ func recupereAnimal():
 			animaux.append(%BoiteAnimaux.get_children()[index_proche].animal)
 			%BoiteAnimaux.get_children()[index_proche].queue_free()
 
+func recupereAnimaux():
+	if sifflet :
+		animaux = tab_base_animaux
+		print(animaux)
+		for i in %BoiteAnimaux.get_children().size():
+			print("FEUR " , i, " animaux : ", %BoiteAnimaux.get_children()[i])
+			%BoiteAnimaux.get_children()[i].queue_free()
+		
 func _unhandled_input(event: InputEvent) -> void:
 	if active_animal.prendreInput(event):
 		va_passer = true
@@ -98,7 +120,8 @@ func _unhandled_input(event: InputEvent) -> void:
 		if animaux.size() > 1:
 			transformationAnimale(-1)
 	elif Input.is_action_just_pressed("sifflet") and is_on_floor():
-		recupereAnimal()
+		#recupereAnimal()
+		recupereAnimaux()
 	
 	if Input.is_action_pressed("grossir"):
 		scale *= 1.1
@@ -106,6 +129,9 @@ func _unhandled_input(event: InputEvent) -> void:
 	elif Input.is_action_pressed("reduire"):
 		scale *= 0.9
 		print(scale)
+	if event.is_action_pressed("debug"):
+		for i in animaux :
+			print("test resource ", i.name)
 
 func _physics_process(delta: float) -> void:
 	var mur:= 0
@@ -117,3 +143,40 @@ func _physics_process(delta: float) -> void:
 	for force in active_animal.prendreMouvements(delta, velocite, is_on_floor(), mur):
 		appliquerForce(force)
 	magieDeMarche()
+
+func gestionBanc(anim_banc,banc):
+	if animaux == tab_base_animaux :
+		var mini_tab : Array[Animal]
+		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+		var tween = get_tree().create_tween()
+		tween.tween_property(bag_menu,"modulate:a",1.0,0.3)
+		bag_menu.btn_show()
+		banc_interactif = banc
+		for i in animaux:
+			if i.name != "hermy":
+				mini_tab.append(i)
+				
+		bag_menu.chefdOrganisation(mini_tab,anim_banc)
+		#bag_menu_opened.emit(mini_tab,anim_banc)
+	
+func gestionFinBanc(tab_anim,tab_banc):
+	var tween = get_tree().create_tween()
+	tween.tween_property(bag_menu,"modulate:a",0.0,0.3)
+	bag_menu.btn_hide()
+	magieReconstructiveMenu(tab_anim)
+	banc_interactif.animaux_bench = tab_banc.duplicate()
+	banc_interactif = null
+	
+func magieReconstructiveMenu(ordre):
+	var hermy = null
+	for i in animaux :
+		if i.name == "hermy": 
+			hermy = i
+	var temp_tab = ordre.duplicate()
+	tab_base_animaux = ordre.duplicate()
+	animaux.clear()
+	animaux.push_front(hermy)
+	for i in temp_tab :
+		if i != null:
+			animaux.append(i)
+	tab_base_animaux = animaux.duplicate()

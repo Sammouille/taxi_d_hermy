@@ -16,6 +16,7 @@ vitesse = 1800.0
 puissance_saut = 700.0
 puissance_mursaut = 400.0
 accroche = SubResource("Curve_3twux")
+name = "ecureil"
 sprite = ExtResource("2_8hxu1")
 collision_shape = SubResource("RectangleShape2D_rvtlf")
 metadata/_custom_type_script = "uid://tfd6qgija5ss"

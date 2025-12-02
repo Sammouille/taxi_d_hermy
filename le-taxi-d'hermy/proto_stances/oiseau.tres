@@ -16,6 +16,7 @@ vitesse_planage = 300.0
 puissance_saut = 150.0
 puissance_battements = 200.0
 planage = SubResource("Curve_16f5b")
+name = "oiseau"
 sprite = ExtResource("2_61ky5")
 collision_shape = SubResource("RectangleShape2D_2ktax")
 metadata/_custom_type_script = "uid://bujka0yxyg8y5"

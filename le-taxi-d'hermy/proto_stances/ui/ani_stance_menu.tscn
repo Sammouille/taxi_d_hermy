@@ -1,0 +1,78 @@
+[gd_scene load_steps=7 format=3 uid="uid://bk6uiilg0va"]
+
+[ext_resource type="Script" uid="uid://mw3yueav2qki" path="res://proto_stances/ui/ani_stance_ordre_drop_animaux.gd" id="1_o5d0f"]
+[ext_resource type="PackedScene" uid="uid://bfr74nrvkq1q6" path="res://proto_stances/ui/ani_stance_drop_zone.tscn" id="2_o5d0f"]
+[ext_resource type="PackedScene" uid="uid://bsushhob1ldsm" path="res://proto_stances/ui/ani_stance_object.tscn" id="3_uu8s3"]
+[ext_resource type="Resource" uid="uid://dh4gmw8dtv6kj" path="res://proto_stances/ecureil.tres" id="5_6r8jv"]
+[ext_resource type="Resource" uid="uid://buxfe7l5tkpxl" path="res://proto_stances/grenouille.tres" id="6_7bkpa"]
+[ext_resource type="Resource" uid="uid://dwmt5c5i1emyw" path="res://proto_stances/oiseau.tres" id="7_dgc4o"]
+
+[node name="Node2D" type="Node2D" node_paths=PackedStringArray("btn")]
+script = ExtResource("1_o5d0f")
+btn = NodePath("Ctrl_Bouton/Btn_valide")
+
+[node name="Ctrl_Bouton" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 751.0
+offset_top = 263.0
+offset_right = 963.0
+offset_bottom = 359.0
+
+[node name="Btn_valide" type="Button" parent="Ctrl_Bouton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Confirmer l'ordre !"
+
+[node name="Text" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Text"]
+layout_mode = 0
+offset_left = 745.0
+offset_top = 25.0
+offset_right = 1111.0
+offset_bottom = 80.0
+theme_override_font_sizes/normal_font_size = 32
+text = "Ordre dans le sac !"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Drop" parent="." instance=ExtResource("2_o5d0f")]
+position = Vector2(109, 99)
+
+[node name="Drop2" parent="." instance=ExtResource("2_o5d0f")]
+position = Vector2(294, 98)
+nb_order = 1
+
+[node name="Drop3" parent="." instance=ExtResource("2_o5d0f")]
+position = Vector2(476, 98)
+nb_order = 2
+
+[node name="Drop4" parent="." instance=ExtResource("2_o5d0f")]
+position = Vector2(654, 96)
+nb_order = 3
+
+[node name="Animals_Object" parent="." groups=["animal_select"] instance=ExtResource("3_uu8s3")]
+position = Vector2(124, 539)
+
+[node name="Animals_Object2" parent="." groups=["animal_select"] instance=ExtResource("3_uu8s3")]
+position = Vector2(313, 529)
+sprite_text = ExtResource("5_6r8jv")
+
+[node name="Animals_Object3" parent="." groups=["animal_select"] instance=ExtResource("3_uu8s3")]
+position = Vector2(486, 522)
+sprite_text = ExtResource("6_7bkpa")
+
+[node name="Animals_Object4" parent="." groups=["animal_select"] instance=ExtResource("3_uu8s3")]
+position = Vector2(667, 521)
+sprite_text = ExtResource("7_dgc4o")
+
+[connection signal="pressed" from="Ctrl_Bouton/Btn_valide" to="." method="_on_btn_valide_pressed"]

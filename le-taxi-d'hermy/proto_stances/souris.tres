@@ -9,6 +9,7 @@ size = Vector2(64, 64)
 [resource]
 script = ExtResource("1_nx5qa")
 vitesse = 5000.0
+name = "hermy"
 sprite = ExtResource("2_ai77t")
 collision_shape = SubResource("RectangleShape2D_m3r3n")
 metadata/_custom_type_script = "uid://vmj4ncllr11s"

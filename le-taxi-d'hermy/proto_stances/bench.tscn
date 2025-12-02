@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://dn4t8lkyyydc1"]
+
+[ext_resource type="Texture2D" uid="uid://dkd58wp7hqeal" path="res://assets/bench.png" id="1_fasi6"]
+[ext_resource type="Script" uid="uid://dgn3slb0ywuyu" path="res://proto_stances/bench.gd" id="1_scjvp"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_scjvp"]
+size = Vector2(128, 64)
+
+[node name="Bench" type="Area2D" node_paths=PackedStringArray("bag_menu") groups=["bench"]]
+script = ExtResource("1_scjvp")
+bag_menu = NodePath("")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_scjvp")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_fasi6")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

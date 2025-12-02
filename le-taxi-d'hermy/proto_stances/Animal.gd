@@ -2,6 +2,7 @@
 extends Resource
 class_name Animal
 
+@export var name : String
 @export var frottements_sol:= 10.0
 @export var frottements_aerien:= 1.0
 @export var masse:= 2.0:

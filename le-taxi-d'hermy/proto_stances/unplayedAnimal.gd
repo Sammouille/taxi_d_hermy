@@ -13,6 +13,18 @@ var acceleration:= Vector2.ZERO
 
 var gravite: float
 
+@export var PGain := 1.0
+
+@export var IGain := 1.0
+
+@export var DGain := 0.1
+
+var last_D_value = Vector2.ZERO
+var integration_stored = Vector2.ZERO
+@export var integral_saturation_min_max := Vector2(1.0,1.0)
+@export var output_min_max := Vector2(100.0,100.0)
+
+
 func _ready() -> void:
 	gravite = get_tree().root.get_child(2).gravite
 	transformationAnimale()
@@ -37,6 +49,31 @@ func magieDeMarche():
 	velocity = velocite
 	if move_and_slide():
 		velocite = velocity
+
+
+func pid_mano(dt, current, target ) -> Vector2:
+	# Distance cible punching ball
+	var correction = target - current
+	
+	var p = correction * PGain
+
+
+	var value_Rate_of_Change = (correction - last_D_value) / dt
+	last_D_value = correction
+	
+	var d = DGain * value_Rate_of_Change
+	
+	## je sais pas pourquoi le i marche pas je me renseignerai plus tard
+	#var i = Vector2.ZERO
+	##integration_stored = integration_stored + (correction * dt)
+	integration_stored = clamp(integration_stored + (correction * dt), -integral_saturation_min_max,integral_saturation_min_max )
+	var i = IGain * integration_stored
+	
+	var pid = p + i + d
+	#print("physic point : ",pid, " | ", correction," | ", target, " | ", current)
+	#print(clamp(pid.x, -output_min_max.x,output_min_max.x ),clamp(pid.y, -output_min_max.y,output_min_max.y ))
+	return Vector2(clamp(pid.x, -output_min_max.x,output_min_max.x ),clamp(pid.y, -output_min_max.y,output_min_max.y ))
+
 
 func _physics_process(delta: float) -> void:
 	var mur:= 0
