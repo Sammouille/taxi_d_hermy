@@ -42,6 +42,7 @@ gravite = 444.0
 
 [node name="AnimalJoue" type="CharacterBody2D" parent="." node_paths=PackedStringArray("menu", "bag_menu")]
 position = Vector2(771, 356)
+floor_max_angle = 0.87266463
 script = ExtResource("1_rthog")
 animaux = Array[ExtResource("3_72wh0")]([ExtResource("4_sjbhr"), ExtResource("5_sjbhr"), ExtResource("6_hiynl"), ExtResource("7_hiynl")])
 menu = NodePath("../Menu")
@@ -102,7 +103,8 @@ shape = SubResource("RectangleShape2D_b32um")
 texture = SubResource("NoiseTexture2D_30mes")
 
 [node name="StaticBody2D5" type="StaticBody2D" parent="."]
-position = Vector2(1080, 328)
+position = Vector2(1030, 370.00006)
+rotation = -0.7853982
 collision_layer = 3
 collision_mask = 3
 

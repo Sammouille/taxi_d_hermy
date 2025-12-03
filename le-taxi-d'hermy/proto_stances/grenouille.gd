@@ -14,7 +14,6 @@ var index_charge := 0.0
 var charge:= false
 var saute:= false
 
-var input_axis:= Vector2.ZERO
 
 func preparationAnimale():
 	inv_duree = 1.0/duree_max_charge

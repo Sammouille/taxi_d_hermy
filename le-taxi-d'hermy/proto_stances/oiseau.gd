@@ -1,9 +1,8 @@
 extends Animal
 class_name Oiseau
 
-@export var vitesse := 1000.0
+
 @export var vitesse_planage:= 800.0
-@export var puissance_saut:= 700.0
 @export var max_battements:= 3
 var index_battement:= 0
 @export var puissance_battements:= 500.0
@@ -13,7 +12,6 @@ var index_planage:= 0.0
 var plane:= false
 var saute:= false
 
-var input_axis:= Vector2.ZERO
 
 func prendreInput(_event: InputEvent, actif:= true):
 	if actif:

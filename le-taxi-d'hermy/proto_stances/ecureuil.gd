@@ -1,14 +1,12 @@
 extends Animal
 class_name Ecureuil
 
-@export var vitesse:= 1000.0
-@export var puissance_saut:= 1000.0
+
 @export var puissance_mursaut:= 800.0
 @export var accroche: Curve
 @export var puissance_ejection:= 200.0
 var index_accroche:= 0.0
 
-var input_axis:= Vector2.ZERO
 
 var saute:= false
 
