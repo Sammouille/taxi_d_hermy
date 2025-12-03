@@ -44,7 +44,7 @@ gravite = 444.0
 position = Vector2(771, 356)
 floor_max_angle = 0.87266463
 script = ExtResource("1_rthog")
-animaux = Array[ExtResource("3_72wh0")]([ExtResource("4_sjbhr"), ExtResource("5_sjbhr"), ExtResource("6_hiynl"), ExtResource("7_hiynl")])
+animaux = Array[ExtResource("3_72wh0")]([ExtResource("4_sjbhr"), ExtResource("7_hiynl"), ExtResource("6_hiynl"), ExtResource("5_sjbhr")])
 menu = NodePath("../Menu")
 bag_menu = NodePath("../bag_menu")
 

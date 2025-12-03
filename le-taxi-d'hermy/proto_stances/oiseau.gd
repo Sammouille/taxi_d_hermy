@@ -10,7 +10,6 @@ var index_battement:= 0
 var index_planage:= 0.0
 
 var plane:= false
-var saute:= false
 
 
 func prendreInput(_event: InputEvent, actif:= true):

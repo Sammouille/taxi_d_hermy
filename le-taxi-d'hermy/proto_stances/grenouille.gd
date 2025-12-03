@@ -12,7 +12,6 @@ var charge_saut := 0.0
 var index_charge := 0.0
 
 var charge:= false
-var saute:= false
 
 
 func preparationAnimale():

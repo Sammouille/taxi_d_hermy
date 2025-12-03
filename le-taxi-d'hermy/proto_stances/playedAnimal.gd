@@ -46,8 +46,16 @@ func lacherAnimal(index: int):
 		
 		animaux.remove_at(index)
 
+func piraterieSauvage(idx_animalgo):
+	va_passer = false
+	active_animal = animaux[idx_animalgo]
+	active_animal.setup(gravite)
+	masse = active_animal.masse
+	inv_masse = active_animal.inv_masse
+	$Sprite2D.texture = active_animal.sprite
+	$CollisionShape2D.shape = active_animal.collision_shape
+
 func transformationAnimale(suite:= 0):
-	print(index_animal)
 	var ancien_index = index_animal
 	index_animal += suite
 	if index_animal >= animaux.size():
@@ -55,17 +63,13 @@ func transformationAnimale(suite:= 0):
 	elif index_animal < 0:
 		index_animal += animaux.size()
 		
-	active_animal = animaux[index_animal]
-	if suite != 0 and va_passer:
-		va_passer = false
-		lacherAnimal(ancien_index)
-		index_animal = animaux.find(active_animal)
 	
-	active_animal.setup(gravite)
-	masse = active_animal.masse
-	inv_masse = active_animal.inv_masse
-	$Sprite2D.texture = active_animal.sprite
-	$CollisionShape2D.shape = active_animal.collision_shape
+	if suite != 0 and va_passer:
+		var der_animal = animaux[index_animal]
+		lacherAnimal(ancien_index)
+		index_animal = animaux.find(der_animal)
+	
+	piraterieSauvage(index_animal)
 
 func prendreAxeInput() -> Vector2:
 	var _input: Vector2
@@ -144,7 +148,7 @@ func _physics_process(delta: float) -> void:
 		appliquerForce(force)
 	magieDeMarche()
 
-func gestionBanc(anim_banc,banc):
+func gestionBanc(anim_banc: Array[Animal],banc):
 	if animaux == tab_base_animaux :
 		var mini_tab : Array[Animal]
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
@@ -180,3 +184,4 @@ func magieReconstructiveMenu(ordre):
 		if i != null:
 			animaux.append(i)
 	tab_base_animaux = animaux.duplicate()
+	transformationAnimale(0)

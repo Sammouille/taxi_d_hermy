@@ -13,6 +13,7 @@ signal fin_menu_sac(tab_anim,tab_banc)
 func _ready() -> void:
 	screen_size = get_viewport_rect().size
 	positionAlchemique()
+	btn_hide()
 
 
 
