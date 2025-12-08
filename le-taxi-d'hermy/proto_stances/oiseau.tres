@@ -7,16 +7,20 @@
 size = Vector2(64, 64)
 
 [sub_resource type="Curve" id="Curve_16f5b"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.75, 0.831), -0.046, -0.046, 0, 0, Vector2(1, 0.416), -2.926, -0.046, 0, 0]
+_limits = [0.0, 1.0, 0.0, 3.0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(2.293436, 0.76785713), -0.046, -0.046, 0, 0, Vector2(3, 0.15584409), -0.4251264, -0.046, 0, 0]
 point_count = 3
 
 [resource]
 script = ExtResource("1_nhhin")
 vitesse_planage = 300.0
-puissance_saut = 150.0
-puissance_battements = 200.0
+puissance_battements = 1200.0
 planage = SubResource("Curve_16f5b")
+force_planage = 40.0
 name = "oiseau"
+puissance_saut = 800.0
+saut_directionnel = false
+masse = 3.0
 sprite = ExtResource("2_61ky5")
 collision_shape = SubResource("RectangleShape2D_2ktax")
 metadata/_custom_type_script = "uid://bujka0yxyg8y5"

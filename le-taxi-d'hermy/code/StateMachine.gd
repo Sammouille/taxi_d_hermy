@@ -33,7 +33,7 @@ func add_etat(etat_name):
 
 @abstract func setup()
 
-@abstract func _etat_logic(delta)
+@abstract func _etat_logic(delta: float)
 
 @abstract func _get_transition(delta: float, velocite: Vector2, on_floor: bool, mur: int)
 

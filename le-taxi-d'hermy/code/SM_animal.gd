@@ -1,6 +1,9 @@
 extends StateMachine
 class_name StateMachineAnimal
 
+var duree_renard:= 0.2
+var index_renard:= 0.0
+
 func setup():
 	add_etat("attend")
 	add_etat("marche")
@@ -9,6 +12,10 @@ func setup():
 	
 	set_etat(etats.attend)
 	#call_deferred("set_etat", etats.attend)
+
+#func machine_logic(delta: float, velocite: Vector2, on_floor: bool, mur: int):
+	#on_floor = alchimieTemporelleCoyotesque(delta,on_floor)
+	#super(delta, velocite, on_floor, mur)
 
 func _get_transition(_delta: float, velocite: Vector2, on_floor: bool, _mur: int):
 	match etat:
@@ -58,7 +65,19 @@ func _get_transition(_delta: float, velocite: Vector2, on_floor: bool, _mur: int
 					return etats.tombe
 
 
-func _etat_logic(_delta): pass
+func alchimieTemporelleCoyotesque(delta: float, on_floor: bool) -> bool:
+	if etat == etats.attend or etat == etats.marche:
+		if on_floor:
+			if index_renard != 0.0:
+				index_renard = 0.0
+		else:
+			index_renard += delta
+			if index_renard > duree_renard:
+				return false
+	
+	return true
+
+func _etat_logic(_delta: float): pass
 
 func _enter_etat(_nouveau_etat, _prec_etat): pass
 
