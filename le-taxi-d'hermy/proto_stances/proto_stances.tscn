@@ -1,7 +1,8 @@
-[gd_scene load_steps=17 format=3 uid="uid://rsmfj28pa4h"]
+[gd_scene load_steps=18 format=3 uid="uid://rsmfj28pa4h"]
 
 [ext_resource type="Script" uid="uid://dqfab0lwdhmtm" path="res://proto_stances/monde.gd" id="1_b32um"]
 [ext_resource type="Script" uid="uid://bt76rs62yua4w" path="res://proto_stances/playedAnimal.gd" id="1_rthog"]
+[ext_resource type="Script" uid="uid://dpd5an0hmj6ji" path="res://proto_stances/camera_2d.gd" id="2_odcve"]
 [ext_resource type="Script" uid="uid://bjvgbg88dac4o" path="res://proto_stances/Animal.gd" id="3_72wh0"]
 [ext_resource type="Resource" uid="uid://byokky2obp467" path="res://proto_stances/souris.tres" id="4_sjbhr"]
 [ext_resource type="Resource" uid="uid://buxfe7l5tkpxl" path="res://proto_stances/grenouille.tres" id="5_sjbhr"]
@@ -39,6 +40,11 @@ color_ramp = SubResource("Gradient_72wh0")
 [node name="Monde" type="Node2D"]
 script = ExtResource("1_b32um")
 gravite = 444.0
+
+[node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("cible")]
+position = Vector2(771, 356)
+script = ExtResource("2_odcve")
+cible = NodePath("../AnimalJoue")
 
 [node name="AnimalJoue" type="CharacterBody2D" parent="." node_paths=PackedStringArray("menu", "bag_menu")]
 position = Vector2(771, 356)

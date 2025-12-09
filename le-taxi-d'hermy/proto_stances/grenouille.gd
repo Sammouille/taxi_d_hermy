@@ -34,7 +34,7 @@ func mouvementTerrestre(delta: float, velocite: Vector2):
 		forces.append(-velocite * frottements_sol * delta)
 		forces.append(-velocite * frottements_aerien * delta)
 	# Input Déplacement
-	if input_axis.x:
+	if input_axis.x and !charge:
 		forces.append(Vector2(input_axis.x * vitesse * delta, 0.0))
 
 	if charge and courbe_charge_saut:
