@@ -20,7 +20,7 @@ var inv_masse := 1.0
 @export var sprite: Texture
 @export var collision_shape: Shape2D
 
-var gravite:= 1.0
+var gravite:= 4.0
 var saute:= false
 
 var sm : StateMachine
@@ -57,6 +57,8 @@ func mouvementTerrestre(delta: float, velocite: Vector2):
 	return forces
 
 func mouvementAerien(delta: float, velocite: Vector2):
+	if saute:
+		saute = false
 	var forces : Array[Vector2] = []
 	# Frottements fluides
 	if velocite.length():
@@ -69,7 +71,7 @@ func mouvementAerien(delta: float, velocite: Vector2):
 	return forces
 
 func prendreMouvements(delta: float, velocite: Vector2, on_floor: bool, mur: int) -> Array[Vector2]:
-	sm.machine_logic(delta, velocite, on_floor, mur)
+	sm.machine_logic(delta, velocite, on_floor, mur, input_axis)
 	
 	print(sm.etats.find_key(sm.etat))
 	print(name)

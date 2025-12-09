@@ -13,11 +13,18 @@ func setup():
 	set_etat(etats.attend)
 	#call_deferred("set_etat", etats.attend)
 
-#func machine_logic(delta: float, velocite: Vector2, on_floor: bool, mur: int):
-	#on_floor = alchimieTemporelleCoyotesque(delta,on_floor)
-	#super(delta, velocite, on_floor, mur)
+func machine_logic(delta: float, velocite: Vector2, on_floor: bool, mur: int, input_axis: Vector2):
+	super(delta, velocite, on_floor, mur, input_axis)
+	if etat == etats.tombe:
+		if der_etat == etats.marche or der_etat == etats.attend:
+			if index_renard < duree_renard:
+				index_renard += delta
+				set_etat(etats.marche)
+	elif etat == etats.marche or etat == etats.attend:
+		if index_renard != 0.0:
+			index_renard = 0.0
 
-func _get_transition(_delta: float, velocite: Vector2, on_floor: bool, _mur: int):
+func _get_transition(_delta: float, velocite: Vector2, on_floor: bool, _mur: int, _input_axis: Vector2):
 	match etat:
 		etats.attend:
 			if on_floor:

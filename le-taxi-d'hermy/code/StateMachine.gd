@@ -6,10 +6,10 @@ var etat = null
 var der_etat = null
 var etats = {}
 
-func machine_logic(delta: float, velocite: Vector2, on_floor: bool, mur: int):
+func machine_logic(delta: float, velocite: Vector2, on_floor: bool, mur: int, input_axis: Vector2):
 	if etat != null :
 		_etat_logic(delta)
-		var transition = _get_transition(delta, velocite, on_floor, mur)
+		var transition = _get_transition(delta, velocite, on_floor, mur, input_axis)
 		if transition != null and transition != etat :
 			set_etat(transition)
 
@@ -35,7 +35,7 @@ func add_etat(etat_name):
 
 @abstract func _etat_logic(delta: float)
 
-@abstract func _get_transition(delta: float, velocite: Vector2, on_floor: bool, mur: int)
+@abstract func _get_transition(delta: float, velocite: Vector2, on_floor: bool, mur: int, input_axis: Vector2)
 
 @abstract func _enter_etat(_nouveau_etat, _prec_etat)
 

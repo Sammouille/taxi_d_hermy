@@ -4,8 +4,9 @@
 [ext_resource type="Texture2D" uid="uid://dr0entchj6ik2" path="res://assets/ecurouille_2.png" id="2_8hxu1"]
 
 [sub_resource type="Curve" id="Curve_3twux"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -2.744, 0.0, 0, 0]
-point_count = 2
+_limits = [0.0, 1.0, 0.0, 2.0]
+_data = [Vector2(0, 1), 0.0, -0.08714699, 0, 0, Vector2(1.7075472, 0.64044946), -0.79400736, -0.79400736, 0, 0, Vector2(2, 0), -2.744, 0.0, 0, 0]
+point_count = 3
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rvtlf"]
 size = Vector2(64, 64)
@@ -13,10 +14,12 @@ size = Vector2(64, 64)
 [resource]
 script = ExtResource("1_rjjj1")
 puissance_mursaut = 400.0
+mursaut_directionnel = false
 accroche = SubResource("Curve_3twux")
 name = "ecureil"
-vitesse = 1800.0
-puissance_saut = 700.0
+vitesse = 3000.0
+puissance_saut = 500.0
+saut_directionnel = false
 sprite = ExtResource("2_8hxu1")
 collision_shape = SubResource("RectangleShape2D_rvtlf")
 metadata/_custom_type_script = "uid://tfd6qgija5ss"
